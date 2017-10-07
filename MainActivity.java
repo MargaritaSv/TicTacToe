@@ -3,6 +3,7 @@ package com.example.magy.second_homework;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        //   String button = view.toString();
         if (view.getId() == R.id.btn11) {
             processClick(btn11);
         }
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.btn23) {
             processClick(btn23);
         }
+
         if (view.getId() == R.id.btn31) {
             processClick(btn31);
         }
@@ -70,27 +71,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.btn32) {
             processClick(btn32);
         }
+
         if (view.getId() == R.id.btn33) {
             processClick(btn33);
         }
     }
 
     private void processClick(Button button) {
-
         if (button.getText().toString().equals("")) {
-            if (player.equals("X")) {
-                player = "O";
-                button.setText("X");
-            } else {
-                player = "X";
-                button.setText("O");
-            }
+
+            String text = player.equals("X") ? "X" : "O";
+            button.setText(text);
             endGame();
+
+            player = player.equals("X") ? "O" : "X";
         }
     }
 
 
     private void endGame() {
+
         String[] tempScore = new String[buttons.length];
         boolean noWinner = true;
 
@@ -102,19 +102,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
+        if (checkHasAWinner(tempScore)) {
+            Toast.makeText(MainActivity.this, "Winner is: Player " + player, Toast.LENGTH_SHORT).show();
+            resetGame();
+        }
 
         if (noWinner) {
-            Toast.makeText(MainActivity.this, " No Winner", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, " No Winner", Toast.LENGTH_SHORT).show();
             resetGame();
         }
-
-        if (checkHasAWinner(tempScore)) {
-            Toast.makeText(MainActivity.this, "Winner is: Player " + player, Toast.LENGTH_LONG).show();
-
-            resetGame();
-        }
-
-
     }
 
     private void resetGame() {
@@ -133,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private boolean checkHasAWinner(String[] position) {
-
         return (position[0].equals(position[1]) && position[0].equals(position[2]) && position[0].equals(player)) || //first hor
                 (position[3].equals(position[4]) && position[3].equals(position[5]) && position[3].equals(player)) ||
                 (position[6].equals(position[7]) && position[6].equals(position[8]) && position[6].equals(player)) ||
@@ -142,7 +137,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 (position[2].equals(position[5]) && position[2].equals(position[8]) && position[2].equals(player)) ||
                 (position[2].equals(position[4]) && position[2].equals(position[6]) && position[2].equals(player)) ||//first diagonal
                 (position[0].equals(position[4]) && position[0].equals(position[8]) && position[0].equals(player));
-
-
     }
 }
