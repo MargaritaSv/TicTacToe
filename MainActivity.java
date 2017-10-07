@@ -8,6 +8,8 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33;
+    Button[] buttons;
+
     private int mTurn;
 
     @Override
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mTurn = 1;
 
-        Button[] buttons = {btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33};
+        buttons = new Button[]{btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33};
 
         for (int i = 0; i < buttons.length; i++) {
             buttons[i].setOnClickListener(this);
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-     //   String button = view.toString();
+        //   String button = view.toString();
         if (view.getId() == R.id.btn11) {
             processClick(btn11);
         }
@@ -81,5 +83,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 button.setText("O");
             }
         }
+
+        endGame();
+    }
+
+
+    private void endGame() {
+        String[] tempScore = new String[buttons.length];
+        boolean end = false;
+
+        for (int i = 0; i < tempScore.length; i++) {
+            tempScore[i] = buttons[i].getText().toString();
+        }
+
     }
 }
