@@ -97,4 +97,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+
+    private boolean checkHasAWinner(String[] position, String player) {
+
+        return (position[0].equals(position[1]) && position[0].equals(position[2]) && position[0].equals(player)) || //first hor
+                (position[3].equals(position[4]) && position[3].equals(position[5]) && position[3].equals(player)) ||
+                (position[6].equals(position[7]) && position[6].equals(position[8]) && position[6].equals(player)) ||
+                (position[0].equals(position[3]) && position[0].equals(position[6]) && position[0].equals(player)) || //first vertical
+                (position[1].equals(position[4]) && position[1].equals(position[7]) && position[1].equals(player)) ||
+                (position[2].equals(position[5]) && position[2].equals(position[8]) && position[2].equals(player)) ||
+                (position[2].equals(position[4]) && position[2].equals(position[6]) && position[2].equals(player)) ||//first diagonal
+                (position[0].equals(position[4]) && position[0].equals(position[8]) && position[0].equals(player));
+
+
+    }
 }
