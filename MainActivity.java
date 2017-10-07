@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn32 = (Button) findViewById(R.id.btn32);
         btn33 = (Button) findViewById(R.id.btn33);
 
+        mTurn = 1;
 
         Button[] buttons = {btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33};
 
@@ -35,6 +36,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+     //   String button = view.toString();
+        if (view.getId() == R.id.btn11) {
+            processClick(btn11);
+        }
 
+        if (view.getId() == R.id.btn12) {
+            processClick(btn12);
+        }
+
+        if (view.getId() == R.id.btn13) {
+            processClick(btn13);
+        }
+
+        if (view.getId() == R.id.btn21) {
+            processClick(btn21);
+        }
+        if (view.getId() == R.id.btn22) {
+            processClick(btn22);
+        }
+
+        if (view.getId() == R.id.btn23) {
+            processClick(btn23);
+        }
+        if (view.getId() == R.id.btn31) {
+            processClick(btn31);
+        }
+
+        if (view.getId() == R.id.btn32) {
+            processClick(btn32);
+        }
+        if (view.getId() == R.id.btn33) {
+            processClick(btn33);
+        }
+    }
+
+    private void processClick(Button button) {
+        if (button.getText().toString().equals("")) {
+            if (mTurn == 1) {
+                mTurn = 2;
+                button.setText("X");
+            } else {
+                mTurn = 1;
+                button.setText("O");
+            }
+        }
     }
 }
