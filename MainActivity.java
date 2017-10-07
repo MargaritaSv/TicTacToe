@@ -1,16 +1,18 @@
 package com.example.magy.second_homework;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33;
     Button[] buttons;
 
-    private int mTurn;
+    private String player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn32 = (Button) findViewById(R.id.btn32);
         btn33 = (Button) findViewById(R.id.btn33);
 
-        mTurn = 1;
+        player = "X";
 
         buttons = new Button[]{btn11, btn12, btn13, btn21, btn22, btn23, btn31, btn32, btn33};
 
@@ -74,32 +76,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void processClick(Button button) {
+
         if (button.getText().toString().equals("")) {
-            if (mTurn == 1) {
-                mTurn = 2;
+            if (player.equals("X")) {
+                player = "O";
                 button.setText("X");
             } else {
-                mTurn = 1;
+                player = "X";
                 button.setText("O");
             }
+            endGame();
         }
-
-        endGame();
     }
 
 
     private void endGame() {
         String[] tempScore = new String[buttons.length];
-        boolean end = false;
+       // boolean end = false;
 
         for (int i = 0; i < tempScore.length; i++) {
             tempScore[i] = buttons[i].getText().toString();
         }
 
+        if (checkHasAWinner(tempScore)) {
+            Toast.makeText(MainActivity.this, "Winner is: Player " + player, Toast.LENGTH_LONG).show();
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    player = "X";
+                    for (int i = 0; i < buttons.length; i++) {
+                        buttons[i].setText("");
+                    }
+                }
+            }, 2000);
+        }
+
+        
     }
 
 
-    private boolean checkHasAWinner(String[] position, String player) {
+    private boolean checkHasAWinner(String[] position) {
 
         return (position[0].equals(position[1]) && position[0].equals(position[2]) && position[0].equals(player)) || //first hor
                 (position[3].equals(position[4]) && position[3].equals(position[5]) && position[3].equals(player)) ||
