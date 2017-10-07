@@ -41,39 +41,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn11) {
-            processClick(btn11);
-        }
-
-        if (view.getId() == R.id.btn12) {
-            processClick(btn12);
-        }
-
-        if (view.getId() == R.id.btn13) {
-            processClick(btn13);
-        }
-
-        if (view.getId() == R.id.btn21) {
-            processClick(btn21);
-        }
-        if (view.getId() == R.id.btn22) {
-            processClick(btn22);
-        }
-
-        if (view.getId() == R.id.btn23) {
-            processClick(btn23);
-        }
-
-        if (view.getId() == R.id.btn31) {
-            processClick(btn31);
-        }
-
-        if (view.getId() == R.id.btn32) {
-            processClick(btn32);
-        }
-
-        if (view.getId() == R.id.btn33) {
-            processClick(btn33);
+        switch (view.getId()) {
+            case R.id.btn11:
+                processClick(btn11);
+                break;
+            case R.id.btn12:
+                processClick(btn12);
+                break;
+            case R.id.btn13:
+                processClick(btn13);
+                break;
+            case R.id.btn21:
+                processClick(btn21);
+                break;
+            case R.id.btn22:
+                processClick(btn22);
+                break;
+            case R.id.btn23:
+                processClick(btn23);
+                break;
+            case R.id.btn31:
+                processClick(btn31);
+                break;
+            case R.id.btn32:
+                processClick(btn32);
+                break;
+            case R.id.btn33:
+                processClick(btn33);
+                break;
         }
     }
 
