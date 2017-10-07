@@ -92,29 +92,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void endGame() {
         String[] tempScore = new String[buttons.length];
-       // boolean end = false;
+        boolean noWinner = true;
 
         for (int i = 0; i < tempScore.length; i++) {
             tempScore[i] = buttons[i].getText().toString();
+
+            if (tempScore[i].equals("")) {
+                noWinner = false;
+            }
+        }
+
+
+        if (noWinner) {
+            Toast.makeText(MainActivity.this, " No Winner", Toast.LENGTH_LONG).show();
+            resetGame();
         }
 
         if (checkHasAWinner(tempScore)) {
             Toast.makeText(MainActivity.this, "Winner is: Player " + player, Toast.LENGTH_LONG).show();
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    player = "X";
-                    for (int i = 0; i < buttons.length; i++) {
-                        buttons[i].setText("");
-                    }
-                }
-            }, 2000);
+            resetGame();
         }
 
-        
+
+    }
+
+    private void resetGame() {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                player = "X";
+                for (int i = 0; i < buttons.length; i++) {
+                    buttons[i].setText("");
+                }
+            }
+        }, 2000);
     }
 
 
